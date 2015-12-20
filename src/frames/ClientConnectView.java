@@ -10,6 +10,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.border.EmptyBorder;
 
 public class ClientConnectView extends JFrame {
@@ -22,24 +25,43 @@ public class ClientConnectView extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				try {
-					ClientConnectView frame = new ClientConnectView();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			@Override
+//			public void run() {
+//				try {
+//					ClientConnectView frame = new ClientConnectView();
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	/**
 	 * Create the frame.
 	 */
 	public ClientConnectView() {
+		 for (LookAndFeelInfo info :  UIManager.getInstalledLookAndFeels()) {
+		        if (info.getName().equals("Windows")) {
+		        	try {
+						UIManager.setLookAndFeel(info.getClassName());
+					} catch (ClassNotFoundException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (InstantiationException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (IllegalAccessException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (UnsupportedLookAndFeelException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+		        }
+		    }
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 284, 133);
 		contentPane = new JPanel();
@@ -52,7 +74,7 @@ public class ClientConnectView extends JFrame {
 		panel.setLayout(new GridLayout(0, 2, 0, 0));
 
 		JLabel lblNewLabel = new JLabel("address");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		panel.add(lblNewLabel);
 
 		tf_address = new JTextField();
@@ -64,7 +86,7 @@ public class ClientConnectView extends JFrame {
 		panel_1.setLayout(new GridLayout(0, 2, 0, 0));
 
 		JLabel lblNickname = new JLabel("nickname");
-		lblNickname.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblNickname.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_1.add(lblNickname);
 
 		tf_nickname = new JTextField();
@@ -77,5 +99,7 @@ public class ClientConnectView extends JFrame {
 
 		btnConnectServer = new JButton("connect");
 		panel_2.add(btnConnectServer);
+		
+		setVisible(true);
 	}
 }

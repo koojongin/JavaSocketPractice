@@ -1,8 +1,9 @@
-package controller;
+package controllers;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import listeners.ServerListener;
 import frames.ServerMainView;
 import frames.ServerManagementView;
 
@@ -10,10 +11,14 @@ public class ServerStarter {
 
 	private ServerMainView startFrame;
 	private ServerManagementView managementFrame;
-
+	private ServerListener serverListener;
+	
+	
 	public ServerStarter() {
 		startFrame = new ServerMainView();
 		attachListener();
+		serverListener = new ServerListener();
+		serverListener.listen();
 	}
 
 	public static void main(String[] args) {
@@ -27,7 +32,6 @@ public class ServerStarter {
 			public void actionPerformed(ActionEvent e) {
 				startFrame.dispose();
 				managementFrame = new ServerManagementView();
-
 			}
 		});
 
